@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22_API연습.html</title>
+</head>
+<body>
+
+    <h1>22_API연습.html</h1>
+    <hr>
+    <div id="root">
+        <!-- <div>
+            <div>asdasd</div>
+            <div>
+                <button></button>
+                <button></button>
+            </div>        
+        </div> -->
+    </div>
+
+    <script>
+        const festivalURL = 'https://apis.data.go.kr/6260000/FestivalService/getFestivalKr?serviceKey=KduDR9%2Fc1e%2BIhCQnNdf2gfUV%2BDkEleHLJ93mk7MCtTzv5qwMFJLvWfKDNaMzCJWD6ZyRvMLS4%2FlU2vYx2slpaw%3D%3D&pageNo=1&numOfRows=10&resultType=json'
+        fetch(festivalURL)
+        .then(resp => resp.json())
+        .then(json => {
+            // console.log(json.getFestivalKr.item)
+            const arr = json.getFestivalKr.item
+            console.log(arr)
+        })
+    </script>
+
+    <script>
+        // const root = document.getElementById('root')
+        // const div_out = document.createElement('div')
+        // const div_in = document.createElement('div')
+        // div_in.innerText = 'asdasd'
+        // const div_btn = document.createElement('div')
+        // const btn1 = document.createElement('button')
+        // btn1.innerText = '버튼1'
+        // const btn2 = document.createElement('button')
+        // btn2.innerText = '버튼2'
+        // div_btn.appendChild(btn1)
+        // div_btn.appendChild(btn2)
+        // div_out.appendChild(div_in)
+        // div_out.appendChild(div_btn)
+        // root.appendChild(div_out)        
+    </script>
+
+    <script>
+        const shoppingURL = 'https://apis.data.go.kr/6260000/ShoppingService/getShoppingKr?serviceKey=KduDR9%2Fc1e%2BIhCQnNdf2gfUV%2BDkEleHLJ93mk7MCtTzv5qwMFJLvWfKDNaMzCJWD6ZyRvMLS4%2FlU2vYx2slpaw%3D%3D&pageNo=1&numOfRows=10&resultType=json'
+        fetch(shoppingURL)
+        .then(resp => resp.json())
+        .then(json => {
+            // console.log(json.getShoppingKr.item)
+            const arr = json.getShoppingKr.item
+            console.log(arr)
+        })
+    </script>
+
+    <script>
+        const attractionURL = 'https://apis.data.go.kr/6260000/AttractionService/getAttractionKr?serviceKey=KduDR9%2Fc1e%2BIhCQnNdf2gfUV%2BDkEleHLJ93mk7MCtTzv5qwMFJLvWfKDNaMzCJWD6ZyRvMLS4%2FlU2vYx2slpaw%3D%3D&pageNo=1&numOfRows=10&resultType=json'
+        fetch(attractionURL)
+        .then(resp => resp.json())
+        .then(json => {
+            // console.log(json.getAttractionKr.item)
+            const arr = json.getAttractionKr.item
+            console.log(arr)
+        })
+    </script>
+    
+</body>
+</html>

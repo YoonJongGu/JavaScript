@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9_AJAX테스트.html</title>
+    <style>
+        #root {
+            border: 2px solid black;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .head {
+            background-color: #dadada;
+            text-align: center;
+            font-weight: bold;
+        }
+        .item,
+        .head {            
+            font-size: 19px;            
+            display: flex;
+        }
+        .item > div,
+        .head > div {
+            border: 1px solid grey;
+            padding: 5px 10px;            
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>9_AJAX테스트.html</h1>
+    <hr>
+
+    <div id="root"></div>
+
+    <script>
+        const root = document.getElementById('root');
+        const url = 'http://192.168.112.7:8080/member5';
+        const opt = {
+            method: 'GET'
+        }
+
+        fetch(url, opt)             // 주소를 요청하면
+        .then(resp => resp.json())  // 응답을 받아서 json형태로 처리하여
+        .then(json => {             // json을 이용하여 코드를 진행하면 된다
+            const arr = json;
+            console.log(arr);
+            console.log(new Date(arr[0].BIRTH).toISOString().split('T')[0]);
+
+            const head = document.createElement('div');
+            const idx = '<div class="userid">IDX</div>';
+            const userid = '<div class="userid">USERID</div>';
+            const userpw = '<div class="userpw">USERPW</div>';
+            const username = '<div class="username">USERNAME</div>';
+            const birth = '<div class="birth">BIRTH</div>';
+            const gender = '<div class="gender">GENDER</div>';           
+
+            head.className = 'head'
+            head.innerHTML += idx;
+            head.innerHTML += userid;
+            head.innerHTML += userpw;
+            head.innerHTML += username;
+            head.innerHTML += birth;
+            head.innerHTML += gender;            
+
+            root.appendChild(head);
+
+            arr.forEach(dto => {
+                const item = document.createElement('div');
+
+                const idx = `<div class="idx">${dto.IDX}</div>`;
+                const userid = `<div class="userid">${dto.USERID}</div>`;
+                const userpw = `<div class="userpw">${dto.USERPW}</div>`;
+                const username = `<div class="username">${dto.USERNAME}</div>`;
+                const birth_format = new Date(dto.BIRTH).toISOString().split('T')[0];
+                const birth = `<div class="birth">${birth_format}</div>`;
+                const gender = `<div class="gender">${dto.GENDER}</div>`;
+
+                item.className = 'item';
+                item.innerHTML += idx;
+                item.innerHTML += userid;
+                item.innerHTML += userpw;
+                item.innerHTML += username;
+                item.innerHTML += birth;
+                item.innerHTML += gender;
+
+                root.appendChild(item);
+            });
+            
+        });
+    </script>
+    
+</body>
+</html>

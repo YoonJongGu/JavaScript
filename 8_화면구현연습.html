@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8_화면구현연습.html</title>
+    <style>
+        #root {
+            border: 2px solid black;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .head {
+            background-color: #dadada;
+        }
+        .item,
+        .head {            
+            font-size: 19px;
+            border: 1px solid grey;
+            display: flex;
+        }
+        .item > div,
+        .head > div {
+            padding: 5px 10px;
+        }
+        .item > div:not(div.name),
+        .head > div:not(div.name) {
+            flex: 0.5;
+        }
+        .item > div.name,
+        .head > div.name {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>8_화면구현연습.html</h1>
+    <hr>
+
+    <div id="root"></div>
+
+    <script>
+        const root = document.getElementById('root');
+        // arr의 데이터를 7번 코드와 같은 방식으로 화면에 반영하세요
+        const arr = [
+            {name: '이지은', kor: 100, eng: 99, mat: 87},
+            {name: '홍진호', kor: 22, eng: 22, mat: 22},
+            {name: '유재석', kor: 95, eng: 92, mat: 97},
+            {name: '신동엽', kor: 100, eng: 84, mat: 92},
+            {name: '강호동', kor: 85, eng: 62, mat: 75}
+        ];
+
+        const head = document.createElement('div');
+        const name = '<div class="name">이름</div>';
+        const kor = '<div class="kor">국어</div>';
+        const eng = '<div class="eng">영어</div>';
+        const mat = '<div class="mat">수학</div>';
+        const sum = '<div class="sum">합계</div>';        
+        const avg = '<div class="avg">평균</div>';
+
+        head.className = 'head'
+        head.innerHTML += name;
+        head.innerHTML += kor;
+        head.innerHTML += eng;
+        head.innerHTML += mat;
+        head.innerHTML += sum;
+        head.innerHTML += avg;
+
+        root.appendChild(head);
+
+
+        function convert(dto) {
+            const item = document.createElement('div');
+
+            const name = `<div class="name">${dto.name}</div>`;
+            const kor = `<div class="kor">${dto.kor}</div>`;
+            const eng = `<div class="eng">${dto.eng}</div>`;
+            const mat = `<div class="mat">${dto.mat}</div>`;
+            const sum = `<div class="sum">${dto.kor + dto.eng + dto.mat}</div>`;
+            const divide = ((dto.kor + dto.eng + dto.mat) / 3).toFixed(1);
+            // const divide = ((dto.kor + dto.eng + dto.mat) / 3).toPrecision(4);
+            const avg = `<div class="avg">${divide}</div>`;
+
+            item.className = 'item'
+            item.innerHTML += name;
+            item.innerHTML += kor;
+            item.innerHTML += eng;
+            item.innerHTML += mat;
+            item.innerHTML += sum;
+            item.innerHTML += avg;
+
+            root.appendChild(item);
+        }
+
+        arr.forEach(dto => convert(dto));
+
+        // arr.forEach(dto => {
+        //     const item = document.createElement('div');
+
+        //     const name = `<div class="name">${dto.name}</div>`;
+        //     const kor = `<div class="kor">${dto.kor}</div>`;
+        //     const eng = `<div class="eng">${dto.eng}</div>`;
+        //     const mat = `<div class="mat">${dto.mat}</div>`;
+        //     const sum = `<div class="sum">${dto.kor + dto.eng + dto.mat}</div>`;
+        //     const divide = ((dto.kor + dto.eng + dto.mat) / 3).toFixed(1);
+        //     const avg = `<div class="avg">${divide}</div>`;
+
+        //     item.className = 'item'
+        //     item.innerHTML += name;
+        //     item.innerHTML += kor;
+        //     item.innerHTML += eng;
+        //     item.innerHTML += mat;
+        //     item.innerHTML += sum;
+        //     item.innerHTML += avg;
+
+        //     root.appendChild(item);
+        // });
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18_필터.html</title>
+    <style>
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            width: 500px;
+        }
+        thead {
+            background-color: #dadada;
+        }
+        th, td {
+            border: 1px solid grey;
+            padding: 5px 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>18_필터.html</h1>
+    <hr>
+
+    <div id="root">
+        <p>
+            <label><input type="checkbox" name="남성">남성</label>
+            <label><input type="checkbox" name="여성">여성</label>
+        </p>
+    </div>       
+    
+
+    <table id="filter">
+        <thead class="thead">
+            <tr class="item">
+                <th class="idx">번호</th>
+                <th class="name">이름</th>
+                <th class="age">나이</th>
+                <th class="gender">성별</th>            
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            <tr class="item">
+                <td class="idx">1</td>
+                <td class="name">짱구</td>
+                <td class="age">7</td>
+                <td class="gender">남성</td>
+            </tr>
+            <tr class="item">
+                <td class="idx">2</td>
+                <td class="name">유리</td>
+                <td class="age">7</td>
+                <td class="gender">여성</td>
+            </tr>
+            <tr class="item">
+                <td class="idx">3</td>
+                <td class="name">철수</td>
+                <td class="age">7</td>
+                <td class="gender">남성</td>
+            </tr>
+            <tr class="item">
+                <td class="idx">4</td>
+                <td class="name">짱아</td>
+                <td class="age">2</td>
+                <td class="gender">여성</td>
+            </tr>
+            <tr class="item">
+                <td class="idx">5</td>
+                <td class="name">수지</td>
+                <td class="age">8</td>
+                <td class="gender">여성</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>               
+        const itemArray = Array.from(document.querySelectorAll('.tbody > .item'));
+        const boxList = document.querySelectorAll('#root input[type="checkbox"]');
+        console.log(itemArray);
+        function handler(event) {
+            // 1) checked 된 checkbox 의 name으로만 구성된 배열
+            const checkedBoxArray = Array.from(document.querySelectorAll('#root input[type="checkbox"]:checked')).map(e => e.name);
+            console.log(checkedBoxArray);
+
+            // 2) item 중에서 gender의 innerText가 checkedBoxArray에 포함되지 않는 요소
+            const result = itemArray.filter(data => checkedBoxArray.includes(data.querySelector('.gender').innerText) == false);            
+            console.log(result.map(e => e.querySelector('.name').innerText));
+
+            itemArray.forEach(data => data.classList.remove('hidden')); // 모든 item에서 hidden 을 제거한다
+
+            if(result.length == itemArray.length) { // 모든 체크박스가 체크되지 않았다면
+                return                              // 필터링 중단(모든 요소를 다시 보여준다)
+            }
+
+            result.forEach(data => data.classList.add('hidden'));
+        }
+
+        boxList.forEach(box => box.onchange = handler);
+    </script>
+    
+</body>
+</html>
